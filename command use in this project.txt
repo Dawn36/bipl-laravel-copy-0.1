@@ -1,0 +1,6 @@
+Make single Action Controller 
+
+php artisan make:controller SavingPlan --invokable
+
+using this lib to make curl request
+composer require guzzlehttp/guzzle

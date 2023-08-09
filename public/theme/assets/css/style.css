@@ -1,0 +1,240 @@
+﻿@import url("aspira.css");
+:root {
+    --bs-themeblue: #0e4997;
+}
+body {
+    font-family: 'aspirademi';
+    font-size: .775em;
+}
+h1, h2, h4 {
+    font-family: 'aspirabold';
+}
+p {
+    font-family: 'aspiralight';
+    font-size: 0.8rem;
+}
+.form-control {
+    font-size: .875em;
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.2rem;
+}
+.btn {
+    font-size: .875rem;
+    outline:none
+}
+    .btn:focus {
+        box-shadow:none !important ;   }
+    .btn-outline-primary {
+        border-color: var( --bs-themeblue);
+        color: var( --bs-themeblue);
+    }
+    .btn-outline-primary:hover, .btn-outline-primary:focus {
+        background-color: var( --bs-themeblue);
+    }
+/*scrollbar start*/
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px
+}
+::-webkit-scrollbar-track {
+    background-color: #f8f8f8;
+}
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #909090 !important;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    color: #909090 !important;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+    color: #909090 !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color: #909090 !important;
+}
+
+
+.login_RC {
+    background: rgba(14, 73, 151, 0.95 );
+}
+
+.brand-icon {
+    background: url(../images/AKD-Logo.svg) center no-repeat;
+    background-size: contain;
+}
+.theme-border {
+    border-color: var(--bs-themeblue) !important;
+}
+.theme-color{
+    color:var(--bs-themeblue) !important
+}
+.theme-bgcolor {
+    background-color: var(--bs-themeblue) !important
+}
+.btn.theme-bgcolor:hover {
+    background-color: #073f8a !important
+}
+header .btn-outline-dark {
+    border-color: #dedede !important;
+}
+.nav .nav-item {
+    align-items: center;
+    display: flex;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 2rem;
+    width: 100%;
+}
+.theme-bg {
+    background: url(../images/bg-shape.svg) no-repeat 20% 20px  ;
+    background-size: contain;
+}
+.custom-icon {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+}
+.icon-email {
+    background: url(../images/Email-icon.svg) center no-repeat;
+
+}
+.icon-password {
+    background: url(../images/Password-icon.svg) center no-repeat;
+}
+#password-field {
+    border-bottom-right-radius: .375rem;
+    border-top-right-radius: .375rem
+}
+.AKD-IPS .input-group-text {
+    padding: 0.375rem 0.55rem;
+    border-top-right-radius: 0rem !important;
+    border-bottom-right-radius: 0rem !important;
+}
+.AKD-IPS .form-control.is-invalid, .AKD-IPS .was-validated .form-control:invalid, .form-control.is-valid, .was-validated .form-control:valid {
+    border-color: #ced4da !important;
+    background-image: none !important
+}
+
+.AKD-IPS .input-group:not(.has-validation) > .dropdown-toggle:nth-last-child(n+3),
+.AKD-IPS .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control,
+.AKD-IPS .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select,
+.AKD-IPS .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating) {
+    border-top-right-radius: .375rem;
+    border-bottom-right-radius: .375rem;
+}
+.saving_plans div.rtl_input{
+    position:relative
+}
+
+.saving_plans div.rtl_input span {
+    font-size: .875em;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0rem 0.5rem;
+    background: #fff;
+}
+.field-icon {
+    position: absolute;
+    right: 11px;
+    top: 11px;
+    z-index:9
+}
+@media (max-width:1200px) {
+}
+
+/*portfolio_block*/
+
+
+/* for chrome/safari */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #187cde;
+    cursor: pointer;
+    border: 0px solid lawngreen;
+    border-radius: 0px;
+}
+
+/* for firefox */
+.slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #187cde;
+    cursor: pointer;
+    border: 0px solid lawngreen;
+    border-radius: 0px;
+}
+
+.slider {
+    border-radius: 0px !important;
+    -webkit-appearance: none;
+    height: 8px;
+    background: #dee2e6;
+    border: 2px 0px 2px 0px solid #dee2e6;
+}
+.portfolio_block.theme-bg {
+    background: url(../images/bg-shape.svg) no-repeat 80% top;
+    background-size: 70%;
+}
+.portfolio_tbl thead{
+    position: relative;
+    
+}
+.portfolio_tbl {
+    white-space: nowrap;
+    text-align: center
+}
+.portfolio_tbl tbody tr {
+    background: #f7f7f7;
+}
+    .portfolio_tbl tbody tr td {
+        border-bottom: 15px solid #fff;
+        vertical-align: middle;
+        border-top: 15px solid #fff;
+        color:#909090
+    }
+    .portfolio_tbl tbody tr td:last-child {
+        padding:0px;
+        background:#fff !important;
+        padding-left:5px
+    }
+     .portfolio_tbl tbody tr td .btn{
+         width:100%;
+         border-radius:2px;
+       
+         
+     }
+    .portfolio_tbl thead tr{
+        color:var(--bs-themeblue)
+    }
+    .portfolio_tbl thead tr::after {
+        background: transparent;
+        height: 36px;
+        width: 100%;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .SavingPlans_tbl tbody tr td:last-child, .SavingPlans_tbl tbody tr .td-bg {
+     
+        background-color: #f8f8f8 !important;
+    }
