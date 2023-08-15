@@ -17,6 +17,7 @@ class AuthSession
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd($request->session()->has('data'));
         if (!$request->session()->has('data')) {
             return redirect()->route('logout');
         }

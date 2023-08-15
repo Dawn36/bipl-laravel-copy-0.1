@@ -54,7 +54,7 @@
                         <div class="mb-3 input-group ">
                             <span class="ar-lable d-none d-lg-flex">بقایا رقم</span>
                             <input type="text" class="form-control" name="cash_balance"
-                                value="{{ $data['Cash_Balance'] }}" placeholder="Cash Balance" required readonly>
+                                value="{{ $clashBalance }}" placeholder="Cash Balance" required readonly>
                             <div class="valid-feedback"><i class="bi-check-circle-fill">&nbsp;</i>Cash balance field is
                                 valid!</div>
                             <div class="invalid-feedback"><i class="bi-x-circle-fill">&nbsp;</i>Cash balance field
@@ -564,9 +564,9 @@
                     $('#modalbody').html(result);
                     $('#exampleModal').modal('show');
                 })
-                .fail(function(jqXHR, ajaxOptions, thrownError) {
-                    alert("Server not responding.....");
-                });
+                // .fail(function(jqXHR, ajaxOptions, thrownError) {
+                //     alert("Server not responding.....");
+                // });
 
         }
 
@@ -668,9 +668,9 @@
                     $('#modalbody').html(result);
                     $('#exampleModal').modal('show');
                 })
-                .fail(function(jqXHR, ajaxOptions, thrownError) {
-                    alert("Server not responding.....");
-                });
+                // .fail(function(jqXHR, ajaxOptions, thrownError) {
+                //     alert("Server not responding.....");
+                // });
 
         }
         var sessionId = localStorage.getItem("session_id");

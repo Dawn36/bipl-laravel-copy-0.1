@@ -19,10 +19,10 @@ class SavingPlan extends Controller
         $data=Session::get('data');
         if(!empty($data))
         {
-        $this->endPoint  =env('SET_END_POINT');
-        $this->sessionId =$data['SESSION_ID'];
-        $this->account =$data['Account'];
-        $this->userName =$data['userName'];
+            $this->endPoint  =env('SET_END_POINT');
+            $this->sessionId =$data['SESSION_ID'];
+            $this->account =$data['Account'];
+            $this->userName =$data['userName'];
         }
         else
         {
@@ -41,10 +41,9 @@ class SavingPlan extends Controller
             'userName' => $this->userName,
         ]);
         $data=$response->json();
-
-        if($data['status'] == '200')
+        if($data['status'] == '200' || $data['status'] == '201')
         {
-        // dd($response->json());
+        // dd($response->json()); || $data['status'] == '201'
         $result=$data['data'];
         $sb = "<option value=''>Select Saving Plan</option>";
         foreach ($result as $row) {
@@ -152,8 +151,7 @@ class SavingPlan extends Controller
             'userName' => $this->userName,
         ]);
         $data=$response->json();
-        
-        if($data['status'] == '200')
+        if($data['status'] == '200' || $data['status'] == '201')
         {
             $data=$data['data'];
             return view('saving-plan/saving_plan_index',compact('data'));
@@ -174,8 +172,23 @@ class SavingPlan extends Controller
     }
     public function savingPlanCreate()
     {
+        $endPoint=env('SET_END_POINT');
+        $data=Session::get('data');
+        $sessionId=$data['SESSION_ID'];
+        $response = Http::withHeaders([
+            'SESSION_ID' => $this->sessionId,
+        ])->post($this->endPoint.'getAccountBalance', [
+            'userName' => $this->userName,
+            'ClientCode' => $this->account,
+        ]);
+        $clashBalance=0;
+        $data=$response->json();
+        if($data['status'] == '200' || $data['status'] == '201')
+        {
+            $clashBalance=$data['data'][0]['Cash_Balance'];
+        }
         $sessionId=$this->sessionId;
-        return view('saving-plan/saving_plan_create',compact('sessionId'));
+        return view('saving-plan/saving_plan_create',compact('sessionId','clashBalance'));
     }
     public  function submitSavingPlan(Request $request)
     {
@@ -270,7 +283,7 @@ class SavingPlan extends Controller
         else
         {
             // $request->session()->flash('error', $response['data'][0]);
-            return  redirect()->route('logout');
+           return  redirect()->route('logout');
         }
 
         return redirect()->back();

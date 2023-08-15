@@ -447,9 +447,9 @@
                     $('#modalbody').html(result);
                     $('#exampleModal').modal('show');
                 })
-                .fail(function(jqXHR, ajaxOptions, thrownError) {
-                    alert("Server not responding.....");
-                });
+                // .fail(function(jqXHR, ajaxOptions, thrownError) {
+                //     alert("Server not responding.....");
+                // });
         }
 
         function submitSavingPlanCreate() {

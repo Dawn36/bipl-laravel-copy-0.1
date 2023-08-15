@@ -19,9 +19,9 @@
                 $('#modalbody').html(result);
                 $('#exampleModal').modal('show');
             })
-            .fail(function(jqXHR, ajaxOptions, thrownError) {
-                alert("Server not responding.....");
-            });
+            // .fail(function(jqXHR, ajaxOptions, thrownError) {
+            //     alert("Server not responding.....");
+            // });
 
     }
 
@@ -78,6 +78,25 @@
         // end if innerWidth
 
     });
+    $(document).ajaxError(function myErrorHandler(
+    event,
+    xhr,
+    ajaxOptions,
+    thrownError
+) {
+    // $('button[id="submitbutton"]').removeAttr("disabled");
+    // $(".indicator-progress").css("display", "none");
+    // $(".indicator-label").css("display", "block");
+    // debugger
+    if (xhr.status == 401) {
+        //alert("Your Session Expire Please Login Again");
+        window.location.reload();
+    }
+    if (xhr.status == 500) {
+        //alert("Something went wrong call the admin");
+        window.location.reload();
+    }
+});
     // DOMContentLoaded  end
     /* dropdown menu end */
 </script>

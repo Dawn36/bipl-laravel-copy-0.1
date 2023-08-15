@@ -68,13 +68,17 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
+        
+        // dd('aa');
         $request->session()->flush();
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
+        if ($request->ajax()) {
+            dd('api response fail');
+        }
         return redirect('/');
     }
 }
