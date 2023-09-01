@@ -11,7 +11,7 @@ function calculateDtm($created_date, $closed_date){
 function sendEmail($toEmail,$subject,$fileName,$data='')
 {
     $to_email=$toEmail;
-    $to_email='dawngill08@gmail.com';
+    // $to_email='dawngill08@gmail.com';
     $from_email = env('MAIL_FROM_ADDRESS');
     $subject = $subject;
     // $cc = env('CCEMAIL');

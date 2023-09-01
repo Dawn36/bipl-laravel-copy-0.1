@@ -54,7 +54,7 @@
                         <div class="mb-3 input-group ">
                             <span class="ar-lable d-none d-lg-flex">بقایا رقم</span>
                             <input type="text" class="form-control" name="cash_balance"
-                                value="{{ $clashBalance }}" placeholder="Cash Balance" required readonly>
+                                value="{{ $cashBalance }}" placeholder="Cash Balance" required readonly>
                             <div class="valid-feedback"><i class="bi-check-circle-fill">&nbsp;</i>Cash balance field is
                                 valid!</div>
                             <div class="invalid-feedback"><i class="bi-x-circle-fill">&nbsp;</i>Cash balance field

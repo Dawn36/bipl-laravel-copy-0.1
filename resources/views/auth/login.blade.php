@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/AKD-LOGO.png') }}" />
     <link href="{{ asset('theme/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
         <link href="{{ asset('theme/assets/css/signin.css') }}" rel="stylesheet" />
-    
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 </head>
 
@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-floating  input-group align-items-center mb-3">
                             <input type="text" class="form-control" id="Email" name="email"
-                                placeholder="name@example.com" value="AKD-IPS2">
+                                placeholder="name@example.com" value="">
                             <label for="Email">User Name</label><i class="bi bi-envelope"></i>
                             @if ($errors->has('email'))
                                 <div class="invalid-feedback" style="display:block"><b>{{ $errors->first('email') }}</b>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-floating input-group show_hide_password  align-items-center">
                             <input type="password" class="form-control" id="password-field" type="password" name="password"
-                                placeholder="Password" required onkeydown="ValidateProductData()" placeholder="Password" value="pakistan@123">
+                                placeholder="Password" required onkeydown="ValidateProductData()" placeholder="Password" value="">
                             <label for="Password">Password</label><button class="password-icon"><i
                                     class="bi bi-eye"></button></i>
                         </div>

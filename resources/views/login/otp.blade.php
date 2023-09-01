@@ -9,6 +9,7 @@
     <title>AKD - Security Limited</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/AKD-LOGO.png') }}" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <link href="{{ asset('theme/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     @if (Route::currentRouteName() == 'login' || Route::currentRouteName() == 'otp')
         <link href="{{ asset('theme/assets/css/signin.css') }}" rel="stylesheet" />

@@ -175,20 +175,22 @@ class SavingPlan extends Controller
         $endPoint=env('SET_END_POINT');
         $data=Session::get('data');
         $sessionId=$data['SESSION_ID'];
-        $response = Http::withHeaders([
-            'SESSION_ID' => $this->sessionId,
-        ])->post($this->endPoint.'getAccountBalance', [
-            'userName' => $this->userName,
-            'ClientCode' => $this->account,
-        ]);
-        $clashBalance=0;
-        $data=$response->json();
-        if($data['status'] == '200' || $data['status'] == '201')
-        {
-            $clashBalance=$data['data'][0]['Cash_Balance'];
-        }
+        // $response = Http::withHeaders([
+        //     'SESSION_ID' => $this->sessionId,
+        // ])->post($this->endPoint.'getAccountBalance', [
+        //     'userName' => $this->userName,
+        //     'ClientCode' => $this->account,
+        // ]);
+        $cashBalance=0;
+        // $data=$response->json();
+        // if($data['status'] == '200' || $data['status'] == '201')
+        // {
+        //     $clashBalance=$data['data'][0]['Cash_Balance'];
+        // }
+        $cashBalance=DB::connection('oracle')->table('IPS_CLIENT_BALANCE')->where('CLIENT_CODE', $this->account)->select('LEDGER_BALANCE')->first();
+        $cashBalance=trim($cashBalance->ledger_balance, '-');
         $sessionId=$this->sessionId;
-        return view('saving-plan/saving_plan_create',compact('sessionId','clashBalance'));
+        return view('saving-plan/saving_plan_create',compact('sessionId','cashBalance'));
     }
     public  function submitSavingPlan(Request $request)
     {

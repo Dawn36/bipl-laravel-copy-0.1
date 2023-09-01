@@ -435,6 +435,17 @@
                   return false;
               }
           });
+          
+          if (currentAmount % 5000 !== 0) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Alert',
+                      text: "Please enter amount that are multiple of 5000",
+                      confirmButtonColor: '#073f8a',
+                  })
+                  results.push('Please enter amount that are multiple of 5000');
+                  return false;
+              }
           $.ajax({
               url: "{{route('get-info-auction')}}",
               method: 'Get',
@@ -446,13 +457,13 @@
                   'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
               },
               success: function(response) {
-                if(parseInt(response.client_info.ledger_balance) < currentAmount)
+                if(parseInt(response.cash_balance) < currentAmount)
                 {
                     Swal.fire({
                         icon: 'error',
                         title: 'Dear Client',
                         text: `Your investment amount for the upcoming auction exceeds your cash balance. You are requested to deposit the shortfall amount 
-                        PkR(${numberFormate(Math.abs(parseInt(response.client_info.ledger_balance) - currentAmount).toFixed(0))}) before 
+                        PkR(${numberFormate(Math.abs(parseInt(response.cash_balance) - currentAmount).toFixed(0))}) before 
                         (${response.auction_details.last_bid_date}) and resubmit your bid`,
                         confirmButtonColor: '#073f8a',
                     })
@@ -527,6 +538,7 @@
       });
 
       function auctionBidSubmit(formId,modalId) {
+        debugger
       
         $.ajax({
             url: $(`#${formId}`).attr('action'),
@@ -536,6 +548,7 @@
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
             success: function(result) {
+                
                 if(result)
                 {
                     Swal.fire({
@@ -543,7 +556,8 @@
                         title: 'Alert',
                         text: "Auction bid submit successfully",
                         confirmButtonColor: '#073f8a',
-                    })
+                    });
+                   // window.location.reload();
                 }
                 else
                 {

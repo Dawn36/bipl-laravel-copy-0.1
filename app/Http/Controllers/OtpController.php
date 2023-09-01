@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Otp;
 use nusoap_client;
+use App\Models\SmsLog;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -66,13 +67,19 @@ class OtpController extends Controller
          //'otp_code' => '000000',
          'expires_at' => Carbon::now()->addMinutes(2)
          ]);
+         SmsLog::create([
+            'user_id' => $userId,
+            'otp_code' => $otpCode, 
+            'mobile_no' => $phoneNumber,
+            'expires_at' => Carbon::now()->addMinutes(2)
+            ]);
          $url = 'https://secure.m3techservice.com/GenericService/webservice_4_1.asmx?WSDL';
          //sir 3008217084
          $client = new nusoap_client($url, 'wsdl');
          $params = array(
              'UserId' =>  $smsUserId,
              'Password' => $smsPassword,
-             'MobileNo' => '923412250984',
+             'MobileNo' => $phoneNumber,
              'MsgId' => '1',
              'SMS' => $sms ,
              'MsgHeader'=> '5272'
