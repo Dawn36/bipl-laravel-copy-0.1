@@ -188,7 +188,12 @@ class SavingPlan extends Controller
         //     $clashBalance=$data['data'][0]['Cash_Balance'];
         // }
         $cashBalance=DB::connection('oracle')->table('IPS_CLIENT_BALANCE')->where('CLIENT_CODE', $this->account)->select('LEDGER_BALANCE')->first();
-        $cashBalance=trim($cashBalance->ledger_balance, '-');
+        try {
+            $cashBalance=trim($cashBalance->ledger_balance, '-');
+        } catch (\Throwable $th) {
+            $cashBalance=0;
+        }
+        // $cashBalance=trim($cashBalance->ledger_balance, '-');
         $sessionId=$this->sessionId;
         return view('saving-plan/saving_plan_create',compact('sessionId','cashBalance'));
     }

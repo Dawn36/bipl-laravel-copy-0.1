@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use PDO;
 
 class AuctionBidController extends Controller
@@ -61,15 +62,16 @@ class AuctionBidController extends Controller
         for($i=0; $i < count($request->maturity); $i++)
         {
             $data = DB::connection('oracle')->table('IPS_SCHEME')->where('AUCTION_ID', $request->maturity[$i])->first();
-            $auctionId = settype($data->auction_id, "int");
+            // $auctionId = settype($data->auction_id, "int");
+            // dd($auctionId);
             $auctionDate = DATE("Y-m-d", strtotime($data->auction_date));
             $schemeCode = $data->scheme_code;
             $issueDate = DATE("Y-m-d", strtotime($data->issue_date));
             $maturityDate = DATE("Y-m-d", strtotime($data->maturity_date));
             $clientCode = $this->account;
-            $amount = $request->amount[$i];
-            $amount = settype($amount, "int");
-            $inputParam1 = $auctionId;
+            $amount = (int) $request->amount[$i];
+            // $amount = settype($amount, "int");
+            $inputParam1 = (int) $data->auction_id;
             $inputParam2 = $auctionDate;
             $inputParam3 = $schemeCode;
             $inputParam4 = $issueDate;
@@ -78,6 +80,18 @@ class AuctionBidController extends Controller
             $inputParam7 = $amount;
             $inputParam8 = null;
             $outputParam = ''; // Initialize the output parameter
+            // Log::info('Executing INSERT_AUCTION_EOI with parameters:', [
+            //     'p1' => $inputParam1,
+            //     'p2' => $inputParam2,
+            //     'p3' => $inputParam3,
+            //     'p4' => $inputParam4,
+            //     'p5' => $inputParam5,
+            //     'p6' => $inputParam6,
+            //     'p7' => $inputParam7,
+            //     'p8' => $inputParam8,
+            //     'p9' => $outputParam,
+            // ]);
+            // dd('a');
             $pdo = DB::getPdo();
             $stmt = $pdo->prepare("begin INSERT_AUCTION_EOI(:p1, :p2,:p3,:p4,:p5,:p6,:p7,:p8,:p9); end;");
             $stmt->bindParam(':p1', $inputParam1, PDO::PARAM_INT);
@@ -149,7 +163,9 @@ class AuctionBidController extends Controller
     public function auctionDate(Request $request)
     {
         $date = DATE("Y-m-d");
-        return  DB::connection('oracle')->table('IPS_SCHEME')->selectRaw('DISTINCT auction_date')->where('SCHEME_TYPE', $request->nonCompetitiveids)->whereDate('LAST_BID_DATE', '>=', $date)->get();
+        return  DB::connection('oracle')->table('IPS_SCHEME')
+        ->selectRaw('DISTINCT auction_date')->where('SCHEME_TYPE', $request->nonCompetitiveids)
+        ->whereDate('LAST_BID_DATE', '>=', $date)->orderby('auction_date','asc')->get();
     }
     public function maturity(Request $request)
     {
@@ -176,8 +192,14 @@ class AuctionBidController extends Controller
         //     $cashBalance=$data['data'][0]['Cash_Balance'];
         // }
         $cashBalance=DB::connection('oracle')->table('IPS_CLIENT_BALANCE')->where('CLIENT_CODE', $this->account)->select('LEDGER_BALANCE')->first();
-        $cashBalance=trim($cashBalance->ledger_balance, '-');
-        $data['cash_balance']=$cashBalance;
+        try {
+            $cashBalance=trim($cashBalance->ledger_balance, '-');
+            $data['cash_balance']=$cashBalance;
+        } catch (\Throwable $th) {
+            //throw $th;
+            $data['cash_balance']=0;
+        }
+        
         $data['auction_details']= DB::connection('oracle')->table('IPS_SCHEME')
             ->where('AUCTION_ID', $request->auction_id)->first();
             return $data;

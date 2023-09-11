@@ -557,7 +557,7 @@
                         text: "Auction bid submit successfully",
                         confirmButtonColor: '#073f8a',
                     });
-                   // window.location.reload();
+                    window.location.reload();
                 }
                 else
                 {

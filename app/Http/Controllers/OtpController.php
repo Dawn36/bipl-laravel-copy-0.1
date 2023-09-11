@@ -73,18 +73,18 @@ class OtpController extends Controller
             'mobile_no' => $phoneNumber,
             'expires_at' => Carbon::now()->addMinutes(2)
             ]);
-         $url = 'https://secure.m3techservice.com/GenericService/webservice_4_1.asmx?WSDL';
-         //sir 3008217084
-         $client = new nusoap_client($url, 'wsdl');
-         $params = array(
-             'UserId' =>  $smsUserId,
-             'Password' => $smsPassword,
-             'MobileNo' => $phoneNumber,
-             'MsgId' => '1',
-             'SMS' => $sms ,
-             'MsgHeader'=> '5272'
-         );
-         $result = $client->call('SendSMS',$params);
+        //  $url = 'https://secure.m3techservice.com/GenericService/webservice_4_1.asmx?WSDL';
+        //  //sir 3008217084
+        //  $client = new nusoap_client($url, 'wsdl');
+        //  $params = array(
+        //      'UserId' =>  $smsUserId,
+        //      'Password' => $smsPassword,
+        //      'MobileNo' => $phoneNumber,
+        //      'MsgId' => '1',
+        //      'SMS' => $sms ,
+        //      'MsgHeader'=> '5272'
+        //  );
+        //  $result = $client->call('SendSMS',$params);
     }
     public function otpResend()
     {
