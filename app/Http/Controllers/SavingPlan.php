@@ -117,7 +117,8 @@ class SavingPlan extends Controller
         $rate   = isset($request->rate) ? ($request->rate/100) : '';
         $DTM    = isset($request->DTM) ? $request->DTM : '';
         
-        $price = round(100/(1+($DTM/365*$rate)),4);
+        // $price = round(100/(1+($DTM/365*$rate)),4);
+        $price = 100/(1+($DTM/365*$rate));
 
         echo trim($price);
     }
@@ -213,7 +214,8 @@ class SavingPlan extends Controller
             $investAmount=str_replace("/-","",$investAmount);
             $investAmount=str_replace(",","",$investAmount);
             $price=100/((($yeild[1]-1)*($yeild[0]/36500))+1);
-            $price=round($price,4);
+            // $price=round($price,4);
+            $price=$price;
             $yeildString=$yeild[1]-1;
             settype($price, "string");
             settype($yeildString, "string");

@@ -139,7 +139,7 @@
                         <input hidden name="pin" id="user_pin" value="" />
                         <input hidden name="table_json" id="table_json" value="" />
                         <div class="text-center mb-5">
-                            <a href="{{ route('saving_plan_index') }}" onclick="showLoader()"
+                            <a href="{{ route('saving_plan_index') }}" 
                                 class="btn btn-rounded blue-btn pills-button col-10 col-lg-2 col-sm-6 mx-2  mt-5"><i
                                     class="icons portfolio-icon me-3"></i>Portfolio</a>
                             <button id="submit" type="button"
@@ -238,7 +238,7 @@
                         <input hidden value="" />
                         <div class="text-center mb-5 ">
                             <div class="dropdown-center">
-                                <a href="{{ route('saving_plan_index') }}" onclick="showLoader()"
+                                <a href="{{ route('saving_plan_index') }}" 
                                     class="btn btn-rounded blue-btn pills-button col-10 col-lg-2 col-sm-6 mx-2  mt-5"><i
                                         class="icons portfolio-icon me-3"></i>Portfolio</a>
                                 <button type="button"
@@ -386,7 +386,10 @@
             var FV = obj.value;
             let invertedTodayPd = (pdValue / 100) * FV;
             let pdMaturity = FV - invertedTodayPd;
-            // console.log('pdMaturity', pdMaturity);
+            // console.log('price', price);
+            // console.log('pdValue', pdValue);
+            // console.log('FV', FV);
+            // console.log('invertedTodayPd', invertedTodayPd);
             $.ajax({
                 type: "Get",
                 url: "{{ route('get_saving_plan_price_amount') }}",
@@ -405,13 +408,13 @@
                         obj.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML =
                             "Rs." +
                             numberFormate(Number(result[1].replaceAll(",", ""))
-                                .toFixed(0)) + "/-";
+                                .toFixed(2)) + "/-";
                         obj.parentElement.nextElementSibling.nextElementSibling.nextElementSibling
                             .nextElementSibling.innerHTML = "Rs." + numberFormate(min
-                                .toFixed(0)) + "/-";
+                                .toFixed(2)) + "/-";
                         obj.parentElement.nextElementSibling.nextElementSibling.nextElementSibling
                             .nextElementSibling.nextElementSibling.innerHTML = "Rs." + numberFormate(percentage
-                                .toFixed(0)) + "/-";
+                                .toFixed(2)) + "/-";
                         // obj.parentElement.parentElement.nextElementSibling.children[1].children[4].innerHTML='Your profit at schedule maturity: gross profit is '+result[1]+' (Net of 15% WHT) Tax = '+percentage+' . <br>(We recommend you choose plan A)';
                         // obj.parentElement.nextElementSibling.nextElementSibling
                         //     .innerHTML = "Profit." + numberFormate(Number(result[1].replaceAll(",", ""))
@@ -443,7 +446,7 @@
                     }
                     //$("#div_samount").show().html(" &nbsp; <b> S.Amount = </b> " + result);
                     obj.parentElement.nextElementSibling.textContent = "Rs." + numberFormate(Number(result[0]
-                        .replaceAll(",", "")).toFixed(0)) + "/-"
+                        .replaceAll(",", "")).toFixed(2)) + "/-"
 
                 }
 
