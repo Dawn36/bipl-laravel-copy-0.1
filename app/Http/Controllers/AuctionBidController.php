@@ -15,6 +15,7 @@ class AuctionBidController extends Controller
     public  $sessionId;
     public  $userName;
     public  $account;
+    public  $email;
     public  $endPoint;
 
     public function __construct()
@@ -24,6 +25,7 @@ class AuctionBidController extends Controller
             $this->endPoint  = env('SET_END_POINT');
             $this->sessionId = $data['SESSION_ID'];
             $this->account = $data['Account'];
+            $this->email = $data['Email'];
             $this->userName = $data['userName'];
         } else {
             return  redirect()->route('logout');
@@ -59,11 +61,15 @@ class AuctionBidController extends Controller
      */
     public function store(Request $request)
     {
-        for($i=0; $i < count($request->maturity); $i++)
-        {
+        $dataArr = array();
+        for ($i = 0; $i < count($request->maturity); $i++) {
             $data = DB::connection('oracle')->table('IPS_SCHEME')->where('AUCTION_ID', $request->maturity[$i])->first();
             // $auctionId = settype($data->auction_id, "int");
-            // dd($auctionId);
+            $dataToPush['investment_amount'] = $request->amount[$i];
+            $dataToPush['tenor'] = $data->scheme_name;
+            $dataToPush['date'] = DATE("Y-m-d", strtotime($request->auction_date));
+            array_push($dataArr, $dataToPush);
+            
             $auctionDate = DATE("Y-m-d", strtotime($data->auction_date));
             $schemeCode = $data->scheme_code;
             $issueDate = DATE("Y-m-d", strtotime($data->issue_date));
@@ -107,13 +113,21 @@ class AuctionBidController extends Controller
             // Get the value of the output parameter
             $outputValue = $stmt->bindParam(':p9', $outputParam, PDO::PARAM_STR | PDO::PARAM_INPUT_OUTPUT, 4000);
         }
-        if($outputValue == true)
-        {
+
+
+        $subject = 'Successful Submission for Upcoming Auction - AKD Securities Limited';
+        $fileName = 'email/email_non_competitive_bid_form';
+        $toEmail = $this->email;
+        sendEmail($toEmail, $subject, $fileName, $dataArr);
+
+        $subject = 'Successful Submission for Upcoming Auction - AKD Securities Limited';
+        $fileName = 'email/email_non_competitive_bid_form';
+        $toEmail = 'ips@akdsl.com';
+        sendEmail($toEmail, $subject, $fileName, $dataArr);
+        if ($outputValue == true) {
             return true;
         }
         return false;
-
-
     }
 
     /**
@@ -164,8 +178,8 @@ class AuctionBidController extends Controller
     {
         $date = DATE("Y-m-d");
         return  DB::connection('oracle')->table('IPS_SCHEME')
-        ->selectRaw('DISTINCT auction_date')->where('SCHEME_TYPE', $request->nonCompetitiveids)
-        ->whereDate('LAST_BID_DATE', '>=', $date)->orderby('auction_date','asc')->get();
+            ->selectRaw('DISTINCT auction_date')->where('SCHEME_TYPE', $request->nonCompetitiveids)
+            ->whereDate('LAST_BID_DATE', '>=', $date)->orderby('auction_date', 'asc')->get();
     }
     public function maturity(Request $request)
     {
@@ -175,10 +189,10 @@ class AuctionBidController extends Controller
     }
     public  function getInfoAuction(Request $request)
     {
-        $data= array();
+        $data = array();
         // $data['client_info']= DB::connection('oracle')->table('IPS_CLIENT_INFO')
         //     ->where('CLIENT_CODE', $this->account)->first();
-        
+
         // $response = Http::withHeaders([
         //     'SESSION_ID' => $this->sessionId,
         // ])->post($this->endPoint.'getAccountBalance', [
@@ -191,17 +205,17 @@ class AuctionBidController extends Controller
         // {
         //     $cashBalance=$data['data'][0]['Cash_Balance'];
         // }
-        $cashBalance=DB::connection('oracle')->table('IPS_CLIENT_BALANCE')->where('CLIENT_CODE', $this->account)->select('LEDGER_BALANCE')->first();
+        $cashBalance = DB::connection('oracle')->table('IPS_CLIENT_BALANCE')->where('CLIENT_CODE', $this->account)->select('LEDGER_BALANCE')->first();
         try {
-            $cashBalance=trim($cashBalance->ledger_balance, '-');
-            $data['cash_balance']=$cashBalance;
+            $cashBalance = trim($cashBalance->ledger_balance, '-');
+            $data['cash_balance'] = $cashBalance;
         } catch (\Throwable $th) {
             //throw $th;
-            $data['cash_balance']=0;
+            $data['cash_balance'] = 0;
         }
-        
-        $data['auction_details']= DB::connection('oracle')->table('IPS_SCHEME')
+
+        $data['auction_details'] = DB::connection('oracle')->table('IPS_SCHEME')
             ->where('AUCTION_ID', $request->auction_id)->first();
-            return $data;
+        return $data;
     }
 }

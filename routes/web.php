@@ -19,9 +19,20 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('email-template', function () {
-    return view('email/email_trade_initiative');
-})->name('email-template');
+// Route::get('email-template', function () {
+//     return view('email/email_trade_initiative');
+// })->name('email-template');
+// Route::get('email-template-non', function () {
+//     $data = array();
+//     $dataToPush['investment_amount']='1000';
+//     $dataToPush['tenor']='565262';
+//     $dataToPush['date']='14-5-2023';
+//     array_push($data,$dataToPush);
+//     array_push($data,$dataToPush);
+//     // dd($dataArr);
+//     return view('email/email_non_competitive_bid_form',compact('data'));
+// })->name('email-template-non');
+
 Route::get('how-to-invest', function () {
     return view('info/how_to_invest');
 })->name('how-to-invest');
