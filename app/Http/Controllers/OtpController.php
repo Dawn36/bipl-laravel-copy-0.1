@@ -20,6 +20,7 @@ class OtpController extends Controller
     {
         $data=Session::get('data');
         $email=$data['Email'];
+        $mobileNo=$data['Mobile_No'];
         if(Session::get('resendotp') == '1')
         {
             $this->sendOtp();
@@ -30,7 +31,7 @@ class OtpController extends Controller
             $this->sendOtp();
         }
         
-            return view('login/otp',compact('email'));
+            return view('login/otp',compact('email','mobileNo'));
         
         // return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
         

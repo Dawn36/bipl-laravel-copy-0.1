@@ -254,16 +254,16 @@
                         <div>
                             <ul class="m-0 " style="text-align: left;">
                                 <li>
-                                    Scheduled Maturity Profit is subject to 15% WHT deducted at source
+                                    Scheduled Maturity Profit is subject to 15% WHT deducted at source. This is not a final tax liability and will depend on you annual income
                                 </li>
                                 <li>WHT = SBP deducts 15 % Withholding Tax at source based on primary dealer or issue
                                     price
                                 </li>
-                                <li>Advance Schedule Maturity Profit may be subject to taxes based on voluntary
-                                    assessment
+                                <li>If you sell your investment before maturity you may be subject to taxes based on
+                                    voluntary assessment such as Capital Gain Tax (CGT)
                                 </li>
                                 <li>CGT = Capital Gain Tax application and submission is based on self-assessment basis
-                                    if sold before Schedule Maturity. We have assumed CGT @ 12.5% for filers</li>
+                                    if sold before Schedule Maturity. We have assumed CGT @ 15% for filers</li>
                                 <li>You can sell your investment at any time 5 days before Schedule Maturity. </li>
                             </ul>
                         </div>

@@ -53,11 +53,12 @@
                         <h1 class="h3 orange-text m-0">Verification Code</h1>
 
                         <p class="py-4 m-0"> Enter the Verification Code that was sent to
-                            <strong class="fs-5">{{ $email }}</strong>
+                            your registered mobile number ending in
+                            <strong class="fs-5">**********{{ substr($mobileNo, -2) }}</strong>
                         </p>
                         <p class="text-center mb-5 theme-color">
-                            <strong class="fs-5" id='clockdiv'></strong> left to enter your
-                            Verification Code
+                            <strong class="fs-5" id='clockdiv'></strong> left to enter your Verification Code
+
                         </p>
 
                         <div class=" input-group   align-items-center">
