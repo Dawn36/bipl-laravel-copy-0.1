@@ -67,7 +67,7 @@
                                                         $diff = CalculateDTM(date('Y-m-d'), $data[$i]['Maturity_Date']);
                                                     @endphp
                                                     <tr>
-                                                        <td>{{ date('d/M/Y', strtotime($data[$i]['Maturity_Date'])) }}</td>
+                                                        <td>{{ date('M d Y', strtotime($data[$i]['Maturity_Date'])) }}</td>
                                                         <td>{{ $diff }}</td>
                                                         <td id='{{ $unit }}'>{{ number_format($unit) }}</td>
                                                         <td id="{{ $data[$i]['Invested_Amount'] }}">

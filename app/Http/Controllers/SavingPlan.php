@@ -68,6 +68,7 @@ class SavingPlan extends Controller
             {
                 continue;
             }
+            $info=round($savingRate,2)."|".round($netSavingRate,2)."|".round($percentageReturn,2)."|".round($percentageReturn-$netSavingRate,2);
             // dd($price);
             // $issue_date = $row->issue_date;
             // $maturity_date = $row->maturity_date;
@@ -83,7 +84,7 @@ class SavingPlan extends Controller
 
             $concat = "$diff|$yield|$pdValue|$schemeCode|$issueDate";
             if ($diff > 0) {
-                $sb .= "<option value=".$concat." data-rate=".$yield.">".$diff." days (Yield ".sprintf("%.2f", $offerPrice)." % p.a)</option>";
+                $sb .= "<option value=".$concat." data-rate=".$yield." data-info=".$info.">".$diff." days (Yield ".sprintf("%.2f", $offerPrice)." % p.a)</option>";
             }
 
         }

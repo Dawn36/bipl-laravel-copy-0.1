@@ -5,9 +5,21 @@
         input[type="radio"]:checked+label {
             color: #0d6efd;
         }
-
-       
+        .tooltip .tooltip-inner {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            max-width: 350px;
+            text-align: start;
+        }
+        .tooltip-class{
+            text-align: center;
+            color: #2e75b6;
+        }
+        .tooltip-color{
+            color: #2e75b6;
+        }
     </style>
+    
     @php
         $data = Session::get('data');
     @endphp
@@ -86,14 +98,22 @@
                                         <th>Maturity Date</th>
                                         <th>Profit On Maturity</th>
                                         <th>WHT 15%</th>
-                                        <th>Net Profit</th>
+                                        <th>Net Profit </th>
                                         {{-- <th>Amount Net of WHT at Maturity</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <tr id="cloneDivInvest">
-                                        <td> <a onclick="removeDiv(this)"><i class="icons delete-icon pointer"></i></a></td>
+                                        <td> 
+                                            {{-- <a onclick="removeDiv(this)"><i class="icons delete-icon pointer"></i></a> --}}
+                                            <i class="fa fa-info-circle" style="font-size:30px;color:#174098" 
+                                            data-bs-toggle="tooltip" 
+                                            data-bs-placement="left"
+                                            data-bs-html="true"
+                                            data-bs-content="<strong>This is <em>HTML</em> content</strong>"
+                                            ></i>
+                                        </td>
                                         <td>
                                             <select class="form-select saving_plans_type" id="ips_saving_plans_type"
                                                 type="text" name="saving_plans_type"
@@ -338,8 +358,12 @@
         }
 
         function savingPlanType(obj) {
-            getPrice('', obj);
-            getPrice(5, obj);
+            if(obj.value != "")
+            {
+                getPrice('', obj);
+                getPrice(5, obj);
+            }
+           
         }
 
         function CalculateAmountRequest(obj) {
@@ -506,8 +530,19 @@
                 event.preventDefault();
             }
         };
+        function getFullMonthName(date) {
+            const monthNames = [
+                "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+            ];
 
+            const monthIndex = date.getMonth();
+            return monthNames[monthIndex];
+        }
         function onIpsPlanChanged(e) {
+            // var informationBox=e.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[0];
+            var informationBox=e.parentElement.previousElementSibling.children[0];
+            
             var values = e.value.split('|');
             var date = new Date();
             // Add five days to current date
@@ -515,8 +550,31 @@
             let day = date.getDate();
             let month = date.getMonth();
             let year = date.getFullYear();
-            let format1 = (month + 1) + "/" + day + "/" + year;
-            if (e.value) {
+            // let format1 = (month + 1) + "/" + day + "/" + year;
+            let format1 = day + " " + getFullMonthName(date) + " " + year;
+            if (e.value) { 
+                dataInfo=e.options[e.selectedIndex].getAttribute('data-info').split('|');
+                htmlContent = `<div>
+                    <div class='tooltip-class'>
+                        <h5 ><b>Do you know?</b></h5>
+                    </div>
+                    <div class='tooltip-color'><b>Investing in this plan gives you <u>${dataInfo[3]}%</u> p.a return over the net min. savings deposit rate at a local bank!.</b></div>
+                    <ul>
+                        <li>Min Rate on Bank Savings ${dataInfo[0]}% p.a.</li>
+                <li>Net Saving Rate after Tax ${dataInfo[1]}% p.a.</li>
+                <li>Net Return on AKDSL Savings Plan ${dataInfo[2]}% p.a.</li>
+                </ul></div>`;
+                //const htmlContent = '<strong>This is <em>HTML</em> content</strong>';
+                //tooltip = new bootstrap.Tooltip(informationBox);
+                tooltip = new bootstrap.Tooltip(informationBox, {
+                    title: htmlContent,
+                    html: true // Set the "html" option to true to allow HTML content
+                });
+
+            // Show the tooltip
+            //tooltip.show();
+                
+                //tooltip._config.title = newValue;
                 e.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.textContent = format1;
                 e.parentElement.nextElementSibling.nextElementSibling.textContent = '0';
                 e.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent =
@@ -528,6 +586,8 @@
                 e.parentElement.nextElementSibling.children[0].disabled = false;
                 // $("#ips_invest_amount_div").show()
             } else {
+                tooltip = new bootstrap.Tooltip(informationBox)
+                tooltip.disable(informationBox)
                 e.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.textContent = '0';
                 e.parentElement.nextElementSibling.nextElementSibling.textContent = '0';
                 e.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.textContent =
