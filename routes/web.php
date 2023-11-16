@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SavingPlanCron;
 use App\Http\Controllers\SavingPlan;
 use App\Http\Controllers\OtpController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\IjaraSukukController;
 use App\Http\Controllers\GeneratePdfController;
 use App\Http\Controllers\AuctionBidController;
@@ -19,9 +20,25 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('email-template', function () {
-//     return view('email/email_trade_initiative');
-// })->name('email-template');
+Route::get('email-template-aa', function () {
+    dd('aa');
+    })->name('email-template-aa');
+    
+Route::get('email-template', function () {
+    $dataArr=array();
+    $dataArr['buy_or_sell']='Buy';
+    $dataArr['client_code']='';
+    $dataArr['scheme_code']='';
+    $dataArr['maturity_date']='';
+    $dataArr['face_value']='';
+    $dataArr['invest_amount']='';
+    $dataArr['price']='';
+    $dataArr['yield']='';
+    $subject='Trade Initiated - Buy -';
+    $fileName='email/email_trade_initiative';
+    $toEmail='ips@akdsl.com';
+    sendEmail($toEmail,$subject,$fileName,$dataArr);
+})->name('email-template');
 // Route::get('email-template-non', function () {
 //     $data = array();
 //     $dataToPush['investment_amount']='1000';
@@ -46,6 +63,10 @@ Route::get('viewing-yor-profile', function () {
     return view('info/viewing_yor_profile');
 })->name('viewing-yor-profile');
 
+Route::get('primary-auction-teasury-bill', function () {
+    return view('info/viewing_primary_auction_teasury_bill');
+})->name('primary-auction-teasury-bill');
+
 Route::get('/run-command', function () {
     Artisan::call('sbp:overnight-repo-floor-rate');
     // return 'Command executed successfully!';
@@ -58,6 +79,8 @@ Route::Get('get_saving_plan_range', [SavingPlan::class, 'getSavingPlanRange'])->
 Route::Get('get_saving_plan_price_amount', [SavingPlan::class, 'getSavingPlansAmount'])->name('get_saving_plan_price_amount');
 
 Route::middleware('authSession')->group(function () {
+    
+    Route::resource('contact-us', ContactUsController::class);
     Route::resource('auction-bid', AuctionBidController::class);
     Route::get('auction-date', [AuctionBidController::class, 'auctionDate'])->name('auction-date');
     Route::get('get-info-auction', [AuctionBidController::class, 'getInfoAuction'])->name('get-info-auction');

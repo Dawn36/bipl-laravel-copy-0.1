@@ -110,7 +110,7 @@
                                         5000.
                                     </li>
                                     <li>
-                                        Scheduled Maturity Profit is subject to 15% WHT deducted at source. This is not a final tax liability and will depend on you annual income
+                                        Scheduled Maturity Profit is subject to 15% WHT deducted at source. This is not a final tax liability and will depend on your annual income
                                     </li>
                                     <li>WHT = SBP deducts 15 % Withholding Tax at source based on primary dealer
                                         or issue price
@@ -130,7 +130,7 @@
                                     <li>We recommend that you check the portfolio to see when your investments
                                         have become
                                         profitable</li>
-                                    <li><b>We recommend that you hold the investment till its designated
+                                    <li><b>We recommend that you hold the investment till its scheduled 
                                             maturity</b></li>
                                 </ul>
                             </div>
@@ -400,9 +400,9 @@
                 .previousElementSibling.children[0].value;
             sellingRange = obj.parentElement.previousElementSibling.previousElementSibling.previousElementSibling
                 .previousElementSibling.children[0].value;
-            if (parseInt(dtm) <= 3) {
+            if (parseInt(dtm) <= 5) {
                 swal({
-                    text: "Please note that you can choose to sell your investment at anytime before 3 Days to Maturity",
+                    text: "Please note that you can choose to sell your investment at anytime before 5 Days to Maturity",
                     confirmButtonColor: '#8CD4F5',
                     type: "danger"
                 }).then(okay => {

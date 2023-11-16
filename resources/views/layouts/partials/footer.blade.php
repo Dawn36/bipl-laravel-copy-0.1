@@ -89,18 +89,18 @@
     // $(".indicator-label").css("display", "block");
     // debugger
     if (xhr.status == 401) {
-        alert("Your Session Expire Please Login Again");
+      //  alert("Your Session Expire Please Login Again");
         // window.location.reload();
-        window.location.href = "{{ route('logout') }}";
+    //    window.location.href = "{{ route('logout') }}";
     }
     else if (xhr.status == 500) {
-        alert("Something went wrong call the admin");
+        //alert("Something went wrong call the admin");
        // window.location.reload();
-       window.location.href = "{{ route('logout') }}";
+       //window.location.href = "{{ route('logout') }}";
     }
     else if(xhr.status == 0)
     {
-        window.location.href = "{{ route('logout') }}";
+        //window.location.href = "{{ route('logout') }}";
     }
 });
     // DOMContentLoaded  end

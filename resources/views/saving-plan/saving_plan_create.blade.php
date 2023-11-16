@@ -274,17 +274,17 @@
                         <div>
                             <ul class="m-0 " style="text-align: left;">
                                 <li>
-                                    Scheduled Maturity Profit is subject to 15% WHT deducted at source. This is not a final tax liability and will depend on you annual income
+                                    Please click “?” and select your investment instrument. Please review the help topics for the investment process
                                 </li>
-                                <li>WHT = SBP deducts 15 % Withholding Tax at source based on primary dealer or issue
-                                    price
+                                <li>
+                                    Before submitting for an investment plan please select “i” and view your rate of return on maturity after adjusting for WHT by the State Bank of Pakistan
                                 </li>
-                                <li>If you sell your investment before maturity you may be subject to taxes based on
-                                    voluntary assessment such as Capital Gain Tax (CGT)
+                                <li>
+                                    Please click “?” and select your investment instrument. Once you have selected either Market Treasury Bills or Ijara Sukuk please select Tax Implications and review applicable taxation measures
                                 </li>
-                                <li>CGT = Capital Gain Tax application and submission is based on self-assessment basis
-                                    if sold before Schedule Maturity. We have assumed CGT @ 15% for filers</li>
-                                <li>You can sell your investment at any time 5 days before Schedule Maturity. </li>
+                                <li>
+                                    You can sell your investment at any time 5 days before maturity at the AKDSL Bid Yield. The maturity date can be viewed at any time by clicking “Portfolio” in the tool bar and expanding your investment instrument tab on the screen
+                                </li>
                             </ul>
                         </div>
                     </div>

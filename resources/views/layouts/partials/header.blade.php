@@ -45,12 +45,14 @@
                             Primary Auction
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <a class="dropdown-item" href="#"
-                                    onclick="openModalBox('IPS Auction Bid','{{ route('auction-bid.create') }}')">NON
-                                    Competitive Bid Form</a>
+                            <li><a class="dropdown-item" href="#">Participation Process&raquo; </a>
+                                <ul class="submenu submenu-left dropdown-menu">
+                                    <li><a href="#"
+                                        onclick="openModalBox('Primary Auction','{{ route('primary-auction-teasury-bill') }}')" class="dropdown-item">Treasury Bills</a></li>
+                                    <li><a href="#" 
+                                            class="dropdown-item">Ijara Sukuk</a></li>
+                                </ul>
                             </li>
-
                             <li><a class="dropdown-item" href="#">Auction Calendar &raquo; </a>
                                 <ul class="submenu submenu-left dropdown-menu">
                                     <li><a href="https://www.sbp.org.pk/ecodata/auction-treasurybills.pdf"
@@ -59,6 +61,16 @@
                                             class="dropdown-item">Auction Sukuk</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    onclick="openModalBox('IPS Auction Bid','{{ route('auction-bid.create') }}')">NON
+                                    Competitive Bid Form</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#"
+                                    >Participation Tariff </a>
+                            </li>
+                           
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -66,7 +78,7 @@
                             <i class="icons chat-icon"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a class="dropdown-item" href="#">MTBs &raquo; </a>
+                            <li><a class="dropdown-item" href="#">Market Treasury Bills &raquo; </a>
                                 <ul class="submenu submenu-left dropdown-menu">
                                     <li><a class="dropdown-item" href="#"
                                             onclick="openModalBox('Our Saving Plan','{{ route('our-saving-plan') }}')">Our
@@ -78,35 +90,24 @@
                                             href="#"onclick="openModalBox('Viewing Your Profile','{{ route('viewing-yor-profile') }}')">Viewing
                                             Your Profile</a></li>
                                     <li><a class="dropdown-item"
-                                            href="#"onclick="openModalBox('Selling Your Investment Before Maturity','{{ route('selling-your-investment') }}')">Selling
+                                            href="#" onclick="openModalBox('Selling Your Investment Before Maturity','{{ route('selling-your-investment') }}')">Selling
                                             Your Investment</a></li>
+                                    <li><a class="dropdown-item"
+                                        href="{{ asset('upload/pdf/Tax_Implications.pdf') }}" target="_blank">Tax Implications</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="{{ asset('upload/pdf/Commission_Structure_Proposal.pdf') }}" target="_blank">IPS Auction Tariff</a></li>
                                 </ul>
                             </li>
-                            <li><a class="dropdown-item" href="#">GIS &raquo; </a>
+                            <li><a class="dropdown-item" href="#">Government Ijara Sukuk &raquo; </a>
                                 <ul class="submenu submenu-left dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Coming Soon</a></li>
                                 </ul>
                             </li>
+                            <li><a class="dropdown-item" href="#" onclick="openModalBox('Contact Us','{{ route('contact-us.create') }}')">Contact Us </a>
+                            </li>
                         </ul>
                     </li>
-                    {{-- <li class="nav-item dropdown">
-                        <a class="nav-link  " href="#" data-bs-toggle="dropdown"><i
-                                class="icons chat-icon"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a class="dropdown-item" href="#"
-                                    onclick="openModalBox('Our Saving Plan','{{ route('our-saving-plan') }}')">Our
-                                    Saving Plan</a></li>
-                            <li><a class="dropdown-item"
-                                    href="#"onclick="openModalBox('How To Invest','{{ route('how-to-invest') }}')">How
-                                    To Invest</a></li>
-                            <li><a class="dropdown-item"
-                                    href="#"onclick="openModalBox('Viewing Your Profile','{{ route('viewing-yor-profile') }}')">Viewing
-                                    Your Profile</a></li>
-                            <li><a class="dropdown-item"
-                                    href="#"onclick="openModalBox('Selling Your Investment Before Maturity','{{ route('selling-your-investment') }}')">Selling
-                                    Your Investment</a></li>
-                        </ul>
-                    </li> --}}
+                    
                     @php
                         $data = Session::get('data');
                     @endphp
@@ -217,12 +218,11 @@
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable scrollbar" role="document">
             <div class="modal-content">
-                <div class="modal-header theme-gradient" style="justify-content: center;">
-                    <div class="col-11">
-                        <h1 class="modal-title h4 text-white" id="exampleModalLabel">New message</h1>
-                    </div>
-                    <div class="col-1">
-                        <button type="button" class="btn-close close btn-close-white" data-bs-dismiss="modal"
+                <div class="modal-header theme-gradient" > 
+                    {{-- style="justify-content: center;" --}}
+                    <div class="col-12" style="display: flex; justify-content: space-between;">
+                        <h1 class="modal-title h4 text-white" id="exampleModalLabel" style="flex: 1;text-align: center;">New message</h1>
+                        <button type="button" class="btn-close close btn-close-white" data-bs-dismiss="modal" style="text-align: right;margin-top: 1%;"
                             aria-label="Close">
                         </button>
                     </div>
