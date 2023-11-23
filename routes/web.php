@@ -50,6 +50,14 @@ Route::get('email-template', function () {
 //     return view('email/email_non_competitive_bid_form',compact('data'));
 // })->name('email-template-non');
 
+Route::get('commission-structure-proposal', function () {
+    return view('info/commission_structure_proposal');
+})->name('commission-structure-proposal');
+
+Route::get('tax-implications', function () {
+    return view('info/tax_implications');
+})->name('tax-implications');
+
 Route::get('how-to-invest', function () {
     return view('info/how_to_invest');
 })->name('how-to-invest');

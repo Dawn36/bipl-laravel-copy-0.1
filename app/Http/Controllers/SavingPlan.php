@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Http;
 
 class SavingPlan extends Controller
@@ -63,18 +65,44 @@ class SavingPlan extends Controller
             $annualProfit=$perDayProfit*365;
             $amountInvested=$price;
             $percentageReturn=($annualProfit/$amountInvested)*100;
+            Log::info('Days==================='.$diff);
+            Log::info('Issue_Date==================='.$row['Issue_Date']);
+            Log::info('Maturity_Date==================='.$row['Maturity_Date']);
+            Log::info('sbpRepoFloorRate==================='.$sbpRepoFloorRate);
+            Log::info('savingRate==================='.$savingRate);
+            Log::info('netSavingRate==================='.$netSavingRate);
+            Log::info('price==================='.$price);
+            Log::info('pdPrice==================='.$pdPrice);
+            Log::info('faceVal==================='.$faceVal);
+            Log::info('profitAtMaturity==================='.$profitAtMaturity);
+            Log::info('taxOnProfit==================='.$taxOnProfit);
+            Log::info('percentageReturn==================='.$percentageReturn);
+            Log::info('======================================================');
             //dd();
-            if($percentageReturn < $netSavingRate)
+            if($percentageReturn > $netSavingRate)
+            {
+                $info=round($savingRate,2)."|".round($netSavingRate,2)."|".round($percentageReturn,2)."|".round($percentageReturn-$netSavingRate,2)."|percentageReturnYes";
+            }
+            elseif($percentageReturn > ($netSavingRate-1.5))
+            {
+                $info=round($savingRate,2)."|".round($netSavingRate,2)."|".round($percentageReturn,2)."|".round($percentageReturn-$netSavingRate,2)."|percentageReturnNo";
+            }
+            else
             {
                 continue;
             }
-            $info=round($savingRate,2)."|".round($netSavingRate,2)."|".round($percentageReturn,2)."|".round($percentageReturn-$netSavingRate,2);
+            // if($percentageReturn < $netSavingRate)
+            // {
+                // continue;
+            // }
+            // $info=round($savingRate,2)."|".round($netSavingRate,2)."|".round($percentageReturn,2)."|".round($percentageReturn-$netSavingRate,2);
             // dd($price);
             // $issue_date = $row->issue_date;
             // $maturity_date = $row->maturity_date;
            
             // yield change to offer price
-            $yield = $row['Yield'];
+           // $yield = $row['Yield'];
+            $yield = $row['Offer_Price'];
             $offerPrice = $row['Offer_Price'];
             $pdValue = $row['PD_Value'];
             $schemeCode = $row['Scheme_Code'];
@@ -214,10 +242,10 @@ class SavingPlan extends Controller
             $investAmount=str_replace("Rs.","",$tableJson[$i]->invest_amount);
             $investAmount=str_replace("/-","",$investAmount);
             $investAmount=str_replace(",","",$investAmount);
-            $price=100/((($yeild[1]-1)*($yeild[0]/36500))+1);
+            $price=100/((($yeild[1])*($yeild[0]/36500))+1);
             // $price=round($price,4);
             $price=$price;
-            $yeildString=$yeild[1]-1;
+            $yeildString=$yeild[1];
             settype($price, "string");
             settype($yeildString, "string");
             // $data=[

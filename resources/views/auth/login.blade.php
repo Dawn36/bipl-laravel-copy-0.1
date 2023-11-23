@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="AKD - Security Limited">
-    <title>AKD - Security Limited</title>
+    <meta name="description" content="AKD Securities Limited">
+    <title>AKD Securities Limited</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/AKD-LOGO.png') }}" />
     <link href="{{ asset('theme/assets/css/bootstrap.min.css') }}" rel="stylesheet" />

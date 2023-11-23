@@ -16,6 +16,13 @@
             color: black;
             padding: 5px;
         }
+        .alert-warning-style{
+            background-color: #2056a2 !important;
+            border-color: #2056a2 !important;
+            color: rgba(255,255,255,0.7) !important;
+            font-style: italic !important;
+            font-weight: bolder;
+        }
     </style>
     <main>
         <div class="authentication-left-panel d-none d-lg-block"></div>
@@ -71,7 +78,7 @@
                                                         <td>{{ $diff }}</td>
                                                         <td id='{{ $unit }}'>{{ number_format($unit) }}</td>
                                                         <td id="{{ $data[$i]['Invested_Amount'] }}">
-                                                            {{ number_format($data[$i]['Invested_Amount']) }}</td>
+                                                            {{ number_format($data[$i]['Invested_Amount'],2) }}</td>
                                                         <td>
                                                             <input type="range" class="form-range slider" value="0"
                                                                 min="0" max="{{ $unit }}" id="customRange2"
@@ -100,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="alert alert-warning d-flex align-items-center col-lg-10 m-auto mb-4" role="alert">
+                        <div class="alert alert-warning d-flex align-items-center col-lg-10 m-auto mb-4 alert-warning-style" role="alert">
                             <i class="icons bi bi-info-square me-3"></i>
                             <div>
                                 <ul class="m-0" style="text-align: left;">
@@ -193,7 +200,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="alert alert-warning d-flex align-items-center col-lg-10 m-auto mb-4" role="alert">
+                        <div class="alert alert-warning d-flex align-items-center col-lg-10 m-auto mb-4 alert-warning-style" role="alert">
                             <i class="icons bi bi-info-square me-3"></i>
                             <div>
                                 <ul class="m-0" style="text-align: left;">
@@ -353,7 +360,7 @@
                 .textContent);
             unit = parseInt(obj.parentElement.previousElementSibling.previousElementSibling.id);
             // console.log('unit',unit);
-            investedAmount = parseInt(obj.parentElement.previousElementSibling.id);
+            investedAmount = parseFloat(obj.parentElement.previousElementSibling.id);
             investedAmount = (investedAmount / unit);
             investedAmount = (investedAmount * range);
             // console.log('inverset',investedAmount);

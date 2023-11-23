@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="AKD - Security Limited">
-    <title>AKD - Security Limited</title>
+    <meta name="description" content="AKD Securities Limited">
+    <title>AKD Securities Limited</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="{{ asset('theme/assets/images/AKD-LOGO.png') }}" />
@@ -67,8 +67,8 @@
                                     Competitive Bid Form</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"
-                                    >Participation Tariff </a>
+                                <a class="dropdown-item" href="#" onclick="openModalBox('Commission Structure','{{ route('commission-structure-proposal') }}')"
+                                    >Auction Tariff</a>
                             </li>
                            
                         </ul>
@@ -93,9 +93,8 @@
                                             href="#" onclick="openModalBox('Selling Your Investment Before Maturity','{{ route('selling-your-investment') }}')">Selling
                                             Your Investment</a></li>
                                     <li><a class="dropdown-item"
-                                        href="{{ asset('upload/pdf/Tax_Implications.pdf') }}" target="_blank">Tax Implications</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{{ asset('upload/pdf/Commission_Structure_Proposal.pdf') }}" target="_blank">IPS Auction Tariff</a></li>
+                                        href="#"onclick="openModalBox('Tax Implications','{{ route('tax-implications') }}')">Tax Implications</a></li>
+                                   
                                 </ul>
                             </li>
                             <li><a class="dropdown-item" href="#">Government Ijara Sukuk &raquo; </a>

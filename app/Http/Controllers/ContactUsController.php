@@ -65,7 +65,7 @@ class ContactUsController extends Controller
         $dataArr['email']=$request->email;
         $dataArr['description']=$request->description;
         sendEmail($toEmail, $subject, $fileName, $dataArr);
-        $request->session()->flash('success', "Your email send successfully. We will contact you shortly");
+        $request->session()->flash('success', "Your message has been received. We will contact you shortly.");
         return redirect()->back();
     }
 

@@ -18,6 +18,13 @@
         .tooltip-color{
             color: #2e75b6;
         }
+        .alert-warning-style{
+            background-color: #2056a2 !important;
+            border-color: #2056a2 !important;
+            color: rgba(255,255,255,0.7) !important;
+            font-style: italic !important;
+            font-weight: bolder;
+        }
     </style>
     
     @php
@@ -57,7 +64,7 @@
                         <div class="mb-3 input-group ">
                             <span class="ar-lable d-none d-lg-flex">اکاؤنٹ نمبر</span>
                             <input type="text" class="form-control" name="account_name"
-                                value="{{ ucwords($data['Account']) }}" placeholder="Account Number" required readonly>
+                                value="{{ $data['Account'] }}" placeholder="Account Number" required readonly>
                             <div class="valid-feedback"><i class="bi-check-circle-fill">&nbsp;</i>Account Number field
                                 is valid!</div>
                             <div class="invalid-feedback"><i class="bi-x-circle-fill">&nbsp;</i>Account Number field
@@ -269,7 +276,7 @@
                             <input value="Save" hidden />
                         </div>
                     </div>
-                    <div class="alert alert-warning d-flex align-items-center col-lg-10 m-auto" role="alert">
+                    <div class="alert alert-warning d-flex align-items-center col-lg-10 m-auto alert-warning-style" role="alert">
                         <i class="icons bi bi-info-square me-3"></i>
                         <div>
                             <ul class="m-0 " style="text-align: left;">
@@ -323,7 +330,7 @@
 
             rate = values[1];
             DTM = values[0];
-            rate = rate - 1;
+           // rate = rate - 1;
             if (days) {
                 rate = rate + 2;
                 DTM = days;
@@ -361,7 +368,7 @@
             if(obj.value != "")
             {
                 getPrice('', obj);
-                getPrice(5, obj);
+                //getPrice(5, obj);
             }
            
         }
@@ -554,7 +561,21 @@
             let format1 = day + " " + getFullMonthName(date) + " " + year;
             if (e.value) { 
                 dataInfo=e.options[e.selectedIndex].getAttribute('data-info').split('|');
-                htmlContent = `<div>
+                if(dataInfo[4] == 'percentageReturnNo')
+                {
+                    htmlContent = `<div>
+                    <div class='tooltip-class'>
+                            <h5 ><b>Do you know?</b></h5>
+                        </div>
+                        <div class='tooltip-color'><b>Secondary Market Rates are coming down and bank profit rates can follow soon! Lock in higher rates before by investing today. 😎</b></div>
+                        <ul>
+                            <li>Net Return on AKDSL Savings Plan ${dataInfo[2]}% p.a.</li>
+                        </ul>
+                    </div>`;
+                }
+                else
+                {
+                    htmlContent = `<div>
                     <div class='tooltip-class'>
                         <h5 ><b>Do you know?</b></h5>
                     </div>
@@ -564,6 +585,8 @@
                 <li>Net Saving Rate after Tax ${dataInfo[1]}% p.a.</li>
                 <li>Net Return on AKDSL Savings Plan ${dataInfo[2]}% p.a.</li>
                 </ul></div>`;
+                }
+                
                 //const htmlContent = '<strong>This is <em>HTML</em> content</strong>';
                 //tooltip = new bootstrap.Tooltip(informationBox);
                 tooltip = new bootstrap.Tooltip(informationBox, {
